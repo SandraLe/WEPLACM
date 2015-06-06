@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_qwnZwAk-EeWftNyabiApZA" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:process id="handle_application" isExecutable="true">
-    <bpmn2:ioSpecification id="InputOutputSpecification_1">
-      <bpmn2:dataInput id="DataInput_CandidateList">
-        <bpmn2:documentation>Candidate List</bpmn2:documentation>
-      </bpmn2:dataInput>
-    </bpmn2:ioSpecification>
+    <bpmn2:ioSpecification id="InputOutputSpecification_1"/>
     <bpmn2:subProcess id="SubProcess_handling_application" name="Handling applications">
       <bpmn2:multiInstanceLoopCharacteristics/>
       <bpmn2:dataStoreReference id="_DataStoreReference_Candidate_Database" name="Candidate Database" dataStoreRef="DataStore_1"/>
@@ -49,14 +45,16 @@
       <bpmn2:serviceTask id="ServiceTask_Add_to_Candidate_List" name="add to candidate list">
         <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
-        <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
-          <bpmn2:targetRef>DataInput_CandidateList</bpmn2:targetRef>
+        <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
+          <bpmn2:targetRef>DataObjectReference_1</bpmn2:targetRef>
         </bpmn2:dataOutputAssociation>
       </bpmn2:serviceTask>
       <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="ServiceTask_Add_to_Candidate_List" targetRef="EndEvent_6"/>
       <bpmn2:endEvent id="EndEvent_6">
         <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
       </bpmn2:endEvent>
+      <bpmn2:dataObject id="DataObject_1" name="Data Object 1"/>
+      <bpmn2:dataObjectReference id="DataObjectReference_1" name="Candidate List" dataObjectRef="DataObject_1"/>
     </bpmn2:subProcess>
     <bpmn2:boundaryEvent id="BoundaryEvent_Application_Deadline" name="Deadline" attachedToRef="SubProcess_handling_application">
       <bpmn2:timerEventDefinition id="_TimerEventDefinition_5"/>
@@ -178,20 +176,19 @@
           <dc:Bounds height="6.0" width="6.0" x="820.0" y="306.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_DataInput_2" bpmnElement="DataInput_CandidateList">
-        <dc:Bounds height="50.0" width="36.0" x="756.0" y="95.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="774.0" y="150.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_2" bpmnElement="DataOutputAssociation_2" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_DataInput_2">
-        <di:waypoint xsi:type="dc:Point" x="950.0" y="144.0"/>
-        <di:waypoint xsi:type="dc:Point" x="950.0" y="120.0"/>
-        <di:waypoint xsi:type="dc:Point" x="792.0" y="120.0"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_4" bpmnElement="DataOutputAssociation_4" sourceElement="_BPMNShape_ServiceTask_2" targetElement="_BPMNShape_DataStoreReference_2">
         <di:waypoint xsi:type="dc:Point" x="548.0" y="216.0"/>
         <di:waypoint xsi:type="dc:Point" x="548.0" y="145.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_DataObjectReference_4" bpmnElement="DataObjectReference_1">
+        <dc:Bounds height="50.0" width="36.0" x="932.0" y="48.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="89.0" x="972.0" y="62.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_1" bpmnElement="DataOutputAssociation_1" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_DataObjectReference_4">
+        <di:waypoint xsi:type="dc:Point" x="950.0" y="144.0"/>
+        <di:waypoint xsi:type="dc:Point" x="950.0" y="98.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
