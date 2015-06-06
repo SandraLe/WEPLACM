@@ -2,75 +2,108 @@
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_PjzwwP-nEeS6S_uKvTR6SQ" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="_Collaboration_2">
     <bpmn2:participant id="_Participant_2" name="WEPLACM" processRef="WEPLACM"/>
+    <bpmn2:participant id="Participant_1" name="WBIG"/>
+    <bpmn2:messageFlow id="MessageFlow_1" name="" sourceRef="Participant_1" targetRef="StartEvent_1"/>
   </bpmn2:collaboration>
   <bpmn2:process id="WEPLACM" isExecutable="true">
     <bpmn2:callActivity id="CallActivity_2" name="Handling applications" calledElement="handle_applications">
+      <bpmn2:extensionElements>
+        <camunda:in variables="all"/>
+        <camunda:out variables="all"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+      <bpmn2:multiInstanceLoopCharacteristics/>
     </bpmn2:callActivity>
     <bpmn2:endEvent id="EndEvent_2">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:callActivity id="CallActivity_4" name="Conclude mandate" calledElement="conclude_mandate">
+      <bpmn2:extensionElements>
+        <camunda:in variables="all"/>
+        <camunda:out variables="all"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:callActivity id="CallActivity_3" name="Prepare Candidate List for submission" calledElement="prepare_list">
+      <bpmn2:extensionElements>
+        <camunda:in variables="all"/>
+        <camunda:out variables="all"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:callActivity id="CallActivity_1" name="Search Candidates" calledElement="search_candidate">
+      <bpmn2:extensionElements>
+        <camunda:in variables="all"/>
+        <camunda:out variables="all"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="CallActivity_1" targetRef="CallActivity_2"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="CallActivity_2" targetRef="CallActivity_3"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="BoundaryEvent_1" targetRef="CallActivity_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="CallActivity_3" targetRef="CallActivity_4"/>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="CallActivity_4" targetRef="EndEvent_2"/>
     <bpmn2:startEvent id="StartEvent_1">
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
+      <bpmn2:messageEventDefinition id="MessageEventDefinition_1"/>
     </bpmn2:startEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_14" name="" sourceRef="StartEvent_1" targetRef="CallActivity_1"/>
+    <bpmn2:boundaryEvent id="BoundaryEvent_1" name="" attachedToRef="CallActivity_2">
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition id="TimerEventDefinition_1">
+        <bpmn2:timeDate xsi:type="bpmn2:tFormalExpression">${deadline}</bpmn2:timeDate>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:boundaryEvent>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="_Collaboration_2">
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_4" bpmnElement="EndEvent_2">
-        <dc:Bounds height="36.0" width="36.0" x="852.0" y="149.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="828.0" y="140.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="870.0" y="190.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="846.0" y="181.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_2" bpmnElement="CallActivity_1">
-        <dc:Bounds height="80.0" width="100.0" x="240.0" y="127.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="228.0" y="117.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_3" bpmnElement="CallActivity_2">
-        <dc:Bounds height="80.0" width="100.0" x="396.0" y="127.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="379.0" y="117.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_4" bpmnElement="CallActivity_3">
-        <dc:Bounds height="80.0" width="100.0" x="564.0" y="127.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="528.0" y="117.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_5" bpmnElement="CallActivity_4">
-        <dc:Bounds height="80.0" width="100.0" x="720.0" y="132.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="672.0" y="117.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_CallActivity_2" targetElement="_BPMNShape_CallActivity_3">
-        <di:waypoint xsi:type="dc:Point" x="340.0" y="167.0"/>
-        <di:waypoint xsi:type="dc:Point" x="396.0" y="167.0"/>
+        <di:waypoint xsi:type="dc:Point" x="328.0" y="157.0"/>
+        <di:waypoint xsi:type="dc:Point" x="379.0" y="157.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="353.0" y="157.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_CallActivity_3" targetElement="_BPMNShape_CallActivity_4">
-        <di:waypoint xsi:type="dc:Point" x="496.0" y="167.0"/>
-        <di:waypoint xsi:type="dc:Point" x="564.0" y="167.0"/>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_BoundaryEvent_2" targetElement="_BPMNShape_CallActivity_4">
+        <di:waypoint xsi:type="dc:Point" x="497.0" y="158.0"/>
+        <di:waypoint xsi:type="dc:Point" x="528.0" y="158.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="510.0" y="158.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_CallActivity_4" targetElement="_BPMNShape_CallActivity_5">
-        <di:waypoint xsi:type="dc:Point" x="664.0" y="167.0"/>
-        <di:waypoint xsi:type="dc:Point" x="692.0" y="167.0"/>
-        <di:waypoint xsi:type="dc:Point" x="692.0" y="172.0"/>
-        <di:waypoint xsi:type="dc:Point" x="720.0" y="172.0"/>
+        <di:waypoint xsi:type="dc:Point" x="628.0" y="157.0"/>
+        <di:waypoint xsi:type="dc:Point" x="672.0" y="157.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="656.0" y="157.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_CallActivity_5" targetElement="_BPMNShape_EndEvent_4">
-        <di:waypoint xsi:type="dc:Point" x="820.0" y="172.0"/>
-        <di:waypoint xsi:type="dc:Point" x="836.0" y="172.0"/>
-        <di:waypoint xsi:type="dc:Point" x="836.0" y="167.0"/>
-        <di:waypoint xsi:type="dc:Point" x="852.0" y="167.0"/>
+        <di:waypoint xsi:type="dc:Point" x="772.0" y="157.0"/>
+        <di:waypoint xsi:type="dc:Point" x="828.0" y="158.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="787.0" y="157.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Participant_2" bpmnElement="_Participant_2" isHorizontal="true">
         <dc:Bounds height="225.0" width="878.0" x="60.0" y="37.0"/>
@@ -80,9 +113,28 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_14" bpmnElement="SequenceFlow_14" sourceElement="_BPMNShape_StartEvent_5" targetElement="_BPMNShape_CallActivity_2">
         <di:waypoint xsi:type="dc:Point" x="185.0" y="157.0"/>
-        <di:waypoint xsi:type="dc:Point" x="212.0" y="157.0"/>
-        <di:waypoint xsi:type="dc:Point" x="212.0" y="167.0"/>
-        <di:waypoint xsi:type="dc:Point" x="240.0" y="167.0"/>
+        <di:waypoint xsi:type="dc:Point" x="228.0" y="157.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="215.0" y="157.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_2" bpmnElement="BoundaryEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="461.0" y="140.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="476.0" y="181.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_Participant_3" bpmnElement="Participant_1" isHorizontal="true">
+        <dc:Bounds height="100.0" width="337.0" x="60.0" y="288.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_1" bpmnElement="MessageFlow_1" sourceElement="_BPMNShape_Participant_3" targetElement="_BPMNShape_StartEvent_5">
+        <di:waypoint xsi:type="dc:Point" x="228.0" y="288.0"/>
+        <di:waypoint xsi:type="dc:Point" x="228.0" y="238.0"/>
+        <di:waypoint xsi:type="dc:Point" x="167.0" y="238.0"/>
+        <di:waypoint xsi:type="dc:Point" x="167.0" y="175.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="202.0" y="238.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
