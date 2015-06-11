@@ -1,61 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_qwnZwAk-EeWftNyabiApZA" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_qwnZwAk-EeWftNyabiApZA" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="_Collaboration_5">
     <bpmn2:participant id="WEPLACM" name="WEPLACM" processRef="handle_application"/>
   </bpmn2:collaboration>
   <bpmn2:process id="handle_application" isExecutable="true">
-    <bpmn2:ioSpecification id="InputOutputSpecification_1"/>
+
     <bpmn2:laneSet id="LaneSet_1" name="Lane Set 1">
       <bpmn2:lane id="Operations" name="Operations">
         <bpmn2:flowNodeRef>ConditionApplication</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>UpdateDatabase</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>CheckApplication</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>IsCandidateSuitable</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>EndEvent_HandleApplications_No</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>EndEvent_2</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>AddToCandidateList</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>EndEvent_HandleApplications_Yes</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>EndEvent_1</bpmn2:flowNodeRef>
       </bpmn2:lane>
       <bpmn2:lane id="CustomerCommunication" name="Customer Communication">
         <bpmn2:flowNodeRef>ReceiveApplication</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>StartEvent_HandleApplictions</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>StartEvent_1</bpmn2:flowNodeRef>
       </bpmn2:lane>
     </bpmn2:laneSet>
-    <bpmn2:dataStoreReference id="CandidateDatabase" name="Candidate Database" dataStoreRef="DataStore_1"/>
-    <bpmn2:dataObject id="DataObject_2" name="Data Object 2"/>
-    <bpmn2:dataObject id="DataObject_3" name="Data Object 3"/>
-    <bpmn2:dataObject id="DataObject_4" name="Data Object 4"/>
-    <bpmn2:dataObject id="DataObject_5" name="Data Object 5"/>
+
     <bpmn2:userTask id="ConditionApplication" name="Condition Application">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_1">
-        <bpmn2:sourceRef>Application</bpmn2:sourceRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_3">
-        <bpmn2:targetRef>StandardizedApplication</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_3" sourceRef="ConditionApplication" targetRef="UpdateDatabase"/>
-    <bpmn2:serviceTask id="UpdateDatabase" name="Update Database">
+    <bpmn2:serviceTask id="UpdateDatabase" camunda:expression="{$Handle_applications.update_database()}" name="Update Database">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_3">
-        <bpmn2:sourceRef>StandardizedApplication</bpmn2:sourceRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
-        <bpmn2:targetRef>CandidateDatabase</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="UpdateDatabase" targetRef="CheckApplication"/>
     <bpmn2:userTask id="CheckApplication" name="Check Application">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_4">
-        <bpmn2:sourceRef>StandardizedApplication</bpmn2:sourceRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_5">
-        <bpmn2:sourceRef>StandardizedJobProfile</bpmn2:sourceRef>
-      </bpmn2:dataInputAssociation>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="CheckApplication" targetRef="IsCandidateSuitable"/>
     <bpmn2:exclusiveGateway id="IsCandidateSuitable" name="Is Candidate suitable?">
@@ -63,43 +41,37 @@
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_15</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_8" name="Yes" sourceRef="IsCandidateSuitable" targetRef="AddToCandidateList"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_15" name="No" sourceRef="IsCandidateSuitable" targetRef="EndEvent_HandleApplications_No"/>
-    <bpmn2:endEvent id="EndEvent_HandleApplications_No">
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="Yes" sourceRef="IsCandidateSuitable" targetRef="AddToCandidateList">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">{$true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_15" name="No" sourceRef="IsCandidateSuitable" targetRef="EndEvent_2">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">{$false}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="EndEvent_2">
       <bpmn2:incoming>SequenceFlow_15</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="AddToCandidateList" name="Add to Candidate List">
+    <bpmn2:serviceTask id="AddToCandidateList" camunda:expression="{$Handle_applications.add_candidate_to_list()}" name="Add to Candidate List">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_5">
-        <bpmn2:targetRef>CandidateList</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="AddToCandidateList" targetRef="EndEvent_HandleApplications_Yes"/>
-    <bpmn2:endEvent id="EndEvent_HandleApplications_Yes">
+    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="AddToCandidateList" targetRef="EndEvent_1"/>
+    <bpmn2:endEvent id="EndEvent_1">
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:receiveTask id="ReceiveApplication" name="Receive Application">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_2">
-        <bpmn2:sourceRef>Application</bpmn2:sourceRef>
-      </bpmn2:dataInputAssociation>
     </bpmn2:receiveTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="ReceiveApplication" targetRef="ConditionApplication"/>
-    <bpmn2:dataObjectReference id="Application" name="Application" dataObjectRef="DataObject_2"/>
-    <bpmn2:dataObjectReference id="StandardizedJobProfile" name="Standardized Job Profile" dataObjectRef="DataObject_4"/>
-    <bpmn2:dataObjectReference id="StandardizedApplication" name="Standardized Application" dataObjectRef="DataObject_3"/>
-    <bpmn2:dataObjectReference id="CandidateList" name="Candidate List" dataObjectRef="DataObject_5"/>
-    <bpmn2:startEvent id="StartEvent_HandleApplictions">
+    <bpmn2:startEvent id="StartEvent_1">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_HandleApplictions" targetRef="ReceiveApplication"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="ReceiveApplication"/>
   </bpmn2:process>
   <bpmn2:dataStore id="DataStore_1" name="Data Store 1"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="_Collaboration_5">
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_13" bpmnElement="StartEvent_HandleApplictions">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_13" bpmnElement="StartEvent_1">
         <dc:Bounds height="36.0" width="36.0" x="144.0" y="629.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="162.0" y="670.0"/>
@@ -171,7 +143,7 @@
           <dc:Bounds height="22.0" width="29.0" x="885.0" y="203.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_18" bpmnElement="EndEvent_HandleApplications_Yes">
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_18" bpmnElement="EndEvent_1">
         <dc:Bounds height="36.0" width="36.0" x="1110.0" y="176.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="1128.0" y="217.0"/>
@@ -184,7 +156,7 @@
           <dc:Bounds height="6.0" width="6.0" x="1082.0" y="194.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_19" bpmnElement="EndEvent_HandleApplications_No">
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_19" bpmnElement="EndEvent_2">
         <dc:Bounds height="36.0" width="36.0" x="1110.0" y="358.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="1128.0" y="399.0"/>
@@ -198,68 +170,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds height="22.0" width="22.0" x="896.0" y="347.0"/>
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_DataStoreReference_7" bpmnElement="CandidateDatabase">
-        <dc:Bounds height="50.0" width="50.0" x="575.0" y="119.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="123.0" x="539.0" y="191.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_2" bpmnElement="DataOutputAssociation_2" sourceElement="_BPMNShape_ServiceTask_4" targetElement="_BPMNShape_DataStoreReference_7">
-        <di:waypoint xsi:type="dc:Point" x="600.0" y="248.0"/>
-        <di:waypoint xsi:type="dc:Point" x="600.0" y="169.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_DataObjectReference_9" bpmnElement="Application">
-        <dc:Bounds height="50.0" width="36.0" x="432.0" y="622.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="70.0" x="415.0" y="677.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_1" bpmnElement="DataInputAssociation_1" sourceElement="_BPMNShape_DataObjectReference_9" targetElement="_BPMNShape_UserTask_15">
-        <di:waypoint xsi:type="dc:Point" x="450.0" y="622.0"/>
-        <di:waypoint xsi:type="dc:Point" x="450.0" y="328.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_2" bpmnElement="DataInputAssociation_2" sourceElement="_BPMNShape_DataObjectReference_9" targetElement="_BPMNShape_ReceiveTask_9">
-        <di:waypoint xsi:type="dc:Point" x="432.0" y="647.0"/>
-        <di:waypoint xsi:type="dc:Point" x="316.0" y="647.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_DataObjectReference_10" bpmnElement="StandardizedApplication">
-        <dc:Bounds height="50.0" width="36.0" x="582.0" y="420.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="150.0" x="525.0" y="475.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_3" bpmnElement="DataOutputAssociation_3" sourceElement="_BPMNShape_UserTask_15" targetElement="_BPMNShape_DataObjectReference_10">
-        <di:waypoint xsi:type="dc:Point" x="488.0" y="328.0"/>
-        <di:waypoint xsi:type="dc:Point" x="582.0" y="426.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_3" bpmnElement="DataInputAssociation_3" sourceElement="_BPMNShape_DataObjectReference_10" targetElement="_BPMNShape_ServiceTask_4">
-        <di:waypoint xsi:type="dc:Point" x="600.0" y="420.0"/>
-        <di:waypoint xsi:type="dc:Point" x="600.0" y="328.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_4" bpmnElement="DataInputAssociation_4" sourceElement="_BPMNShape_DataObjectReference_10" targetElement="_BPMNShape_UserTask_16">
-        <di:waypoint xsi:type="dc:Point" x="618.0" y="426.0"/>
-        <di:waypoint xsi:type="dc:Point" x="712.0" y="328.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_DataObjectReference_11" bpmnElement="StandardizedJobProfile">
-        <dc:Bounds height="50.0" width="36.0" x="732.0" y="371.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="146.0" x="677.0" y="426.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_5" bpmnElement="DataInputAssociation_5" sourceElement="_BPMNShape_DataObjectReference_11" targetElement="_BPMNShape_UserTask_16">
-        <di:waypoint xsi:type="dc:Point" x="750.0" y="371.0"/>
-        <di:waypoint xsi:type="dc:Point" x="750.0" y="328.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_DataObjectReference_12" bpmnElement="CandidateList">
-        <dc:Bounds height="50.0" width="36.0" x="992.0" y="47.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="29.0" width="132.0" x="850.0" y="60.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_5" bpmnElement="DataOutputAssociation_5" sourceElement="_BPMNShape_ServiceTask_5" targetElement="_BPMNShape_DataObjectReference_12">
-        <di:waypoint xsi:type="dc:Point" x="1010.0" y="154.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1010.0" y="97.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Participant_7" bpmnElement="WEPLACM" isHorizontal="true">
         <dc:Bounds height="779.0" width="1142.0" x="54.0" y="0.0"/>
