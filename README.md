@@ -15,7 +15,13 @@
 
 ##Entitäten
 <ul>
-  <li>Als zusammenfassende Enität: Mandate</li>
+  <li>Als zusammenfassende Enität: Mandate
+    <ul>
+      <li>id</li>
+      <li>Job Profile ID</li>
+      <li>Candidate List</li>
+    </ul>
+  </li>
   <li>Hiring Information (Irgendwie in das Mandat mit integrieren</li>
   <li>Invoive</li>
   <li>Application / Standardized Application</li>
