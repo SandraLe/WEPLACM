@@ -24,8 +24,8 @@ protected String address;
 @NotNull
 protected String phoneNumber;
 	
-@OneToMany(mappedBy = "customer")
-protected Collection<Mandate> mandate = new ArrayList<Mandate>();
+
+//protected Collection<Mandate> mandate = new ArrayList<Mandate>();
 
 
 	//Default Constructor
@@ -58,13 +58,13 @@ public void setPhoneNumber(String phoneNumber) {
 };
 
 	
-public Collection<Mandate> getMandate() {
+/*public Collection<Mandate> getMandate() {
 	return mandate;
 };
 
 public void addToMandate(Mandate value) {
 	mandate.add(value);
-};
+};*/
 	
 	@Override
 	public String toString() {

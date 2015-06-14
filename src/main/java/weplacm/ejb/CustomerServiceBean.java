@@ -52,15 +52,15 @@ public class CustomerServiceBean {
 		em.remove(getCustomer(id));
 	}
 	
-	public Customer getCustomerWithFetchedReferences(long id) {
+	/*public Customer getCustomerWithFetchedReferences(long id) {
 		Customer customer = getCustomer(id);
 		forceLoadOfMandate(customer);
 		return customer;
-	}
+	}*/
 	
-	private void forceLoadOfMandate(Customer customer) {
+	/*private void forceLoadOfMandate(Customer customer) {
 		customer.getMandate().size();
-	}
+	}*/
 	
 	
 }
