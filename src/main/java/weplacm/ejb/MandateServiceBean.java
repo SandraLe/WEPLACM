@@ -85,7 +85,7 @@ public void removeFromCandidateRatings(CandidateRating detachedCandidateRating) 
 	mandate.getCandidateRatings().remove(candidateRating);
 	em.remove(candidateRating);
 }
-public void addToHiringInformation(long id, ) {
+public void addToHiringInformation(long id) {
 	Mandate mandate = getMandate(id);
 	HiringInformation hiringInformation = new HiringInformation();
 	hiringInformation.setMandate(mandate);
@@ -95,7 +95,7 @@ public void addToHiringInformation(long id, ) {
 public void removeFromHiringInformation(HiringInformation detachedHiringInformation) {
 	HiringInformation hiringInformation = em.merge(detachedHiringInformation);
 	Mandate mandate = hiringInformation.getMandate();
-	mandate.getHiringInformation().remove(hiringInformation);
+	mandate.setHiringInformation(null);
 	em.remove(hiringInformation);
 }
 public void addToApplication(long id, Candidate candidate) {
@@ -112,7 +112,7 @@ public void removeFromApplication(Application detachedApplication) {
 	mandate.getApplication().remove(application);
 	em.remove(application);
 }
-public void addToJobProfile(long id, ) {
+public void addToJobProfile(long id) {
 	Mandate mandate = getMandate(id);
 	JobProfile jobProfile = new JobProfile();
 	jobProfile.setMandate(mandate);
@@ -122,7 +122,7 @@ public void addToJobProfile(long id, ) {
 public void removeFromJobProfile(JobProfile detachedJobProfile) {
 	JobProfile jobProfile = em.merge(detachedJobProfile);
 	Mandate mandate = jobProfile.getMandate();
-	mandate.getJobProfile().remove(jobProfile);
+	mandate.setJobProfile(null);
 	em.remove(jobProfile);
 }
 	
