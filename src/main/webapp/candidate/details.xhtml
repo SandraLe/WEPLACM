@@ -7,32 +7,32 @@
 <ui:composition template="/resources/master.xhtml">
 	<ui:define name="metadata">
 		<f:metadata>
-			<f:viewParam name="id" value="#{dishDetails.id}"></f:viewParam>
-			<f:event listener="#{dishDetails.ensureInitialized}" type="preRenderView"></f:event>
+			<f:viewParam name="id" value="#{candidateDetails.id}"></f:viewParam>
+			<f:event listener="#{candidateDetails.ensureInitialized}" type="preRenderView"></f:event>
 		</f:metadata>
 	</ui:define>
-	<ui:define name="title">Dish Details</ui:define>
+	<ui:define name="title">Candidate Details</ui:define>
 	<ui:define name="content">
 		<div class="details">
-			<h2>Dish ##{dishDetails.dish.id}</h2>
+			<h2>Candidate ##{candidateDetails.candidate.id}</h2>
 			<h:form>
 				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error"
 					footerClass="form-footer">
 <h:outputLabel value="Name" for="name" />
-	<h:inputText id="name" value="#{dishDetails.dish.name}">
+	<h:inputText id="name" value="#{candidateDetails.candidate.name}">
 	</h:inputText>
 <h:message for="name" />
 <h:outputLabel value="Description" for="description" />
-	<h:inputText id="description" value="#{dishDetails.dish.description}">
+	<h:inputText id="description" value="#{candidateDetails.candidate.description}">
 	</h:inputText>
 <h:message for="description" />
 <h:outputLabel value="Price" for="price" />
-	<h:inputText id="price" value="#{dishDetails.dish.price}">
+	<h:inputText id="price" value="#{candidateDetails.candidate.price}">
 	</h:inputText>
 <h:message for="price" />
 												<f:facet name="footer">
-						<h:commandButton value="Submit changes" action="#{dishDetails.submitMasterDataChanges}" />
-						<h:commandButton value="Remove Dish" action="#{dishDetails.removeDish}" />
+						<h:commandButton value="Submit changes" action="#{candidateDetails.submitMasterDataChanges}" />
+						<h:commandButton value="Remove Candidate" action="#{candidateDetails.removeCandidate}" />
 					</f:facet>
 				</h:panelGrid>
 				

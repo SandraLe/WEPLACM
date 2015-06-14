@@ -5,37 +5,42 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/resources/master.xhtml">
-	<ui:define name="title">Customer List</ui:define>
+	<ui:define name="title">Mandate List</ui:define>
 	<ui:define name="content">
-		<h2>Customer List</h2>
-		<h:dataTable value="#{customerList.all}" var="cur"
+		<h2>Mandate List</h2>
+		<h:dataTable value="#{mandateList.all}" var="cur"
 			styleClass="data-table" headerClass="data-cell header-cell"
 			columnClasses="data-cell,data-cell"
-			rendered="#{not empty customerList.all}">
+			rendered="#{not empty mandateList.all}">
 <h:column>
-	<f:facet name="header">Name</f:facet>
-	<h:outputText value="#{cur.name}">
+	<f:facet name="header">Client</f:facet>
+	<h:outputText value="#{cur.client}">
 	</h:outputText>
 </h:column>
 <h:column>
-	<f:facet name="header">Address</f:facet>
-	<h:outputText value="#{cur.address}">
+	<f:facet name="header">Received</f:facet>
+	<h:outputText value="#{cur.received}">
 	</h:outputText>
 </h:column>
 <h:column>
-	<f:facet name="header">PhoneNumber</f:facet>
-	<h:outputText value="#{cur.phoneNumber}">
+	<f:facet name="header">HiringInformation</f:facet>
+	<h:outputText value="#{cur.hiringInformation}">
+	</h:outputText>
+</h:column>
+<h:column>
+	<f:facet name="header">JobProfile</f:facet>
+	<h:outputText value="#{cur.jobProfile}">
 	</h:outputText>
 </h:column>
 								<h:column>
-				<h:link outcome="/customer/details.xhtml">
+				<h:link outcome="/mandate/details.xhtml">
 					<f:param name="id" value="#{cur.id}"></f:param>
 					Details
 				</h:link>
 			</h:column>
 		</h:dataTable>
 		<h:form>
-			<h:commandButton value="Create new Customer" action="create" />
+			<h:commandButton value="Create new Mandate" action="create" />
 		</h:form>
 	</ui:define>
 </ui:composition>

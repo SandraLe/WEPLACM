@@ -5,37 +5,37 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/resources/master.xhtml">
-	<ui:define name="title">Dish List</ui:define>
+	<ui:define name="title">Client List</ui:define>
 	<ui:define name="content">
-		<h2>Dish List</h2>
-		<h:dataTable value="#{dishList.all}" var="cur"
+		<h2>Client List</h2>
+		<h:dataTable value="#{clientList.all}" var="cur"
 			styleClass="data-table" headerClass="data-cell header-cell"
 			columnClasses="data-cell,data-cell"
-			rendered="#{not empty dishList.all}">
+			rendered="#{not empty clientList.all}">
 <h:column>
 	<f:facet name="header">Name</f:facet>
 	<h:outputText value="#{cur.name}">
 	</h:outputText>
 </h:column>
 <h:column>
-	<f:facet name="header">Description</f:facet>
-	<h:outputText value="#{cur.description}">
+	<f:facet name="header">Address</f:facet>
+	<h:outputText value="#{cur.address}">
 	</h:outputText>
 </h:column>
 <h:column>
-	<f:facet name="header">Price</f:facet>
-	<h:outputText value="#{cur.price}">
+	<f:facet name="header">PhoneNumber</f:facet>
+	<h:outputText value="#{cur.phoneNumber}">
 	</h:outputText>
 </h:column>
 								<h:column>
-				<h:link outcome="/dish/details.xhtml">
+				<h:link outcome="/client/details.xhtml">
 					<f:param name="id" value="#{cur.id}"></f:param>
 					Details
 				</h:link>
 			</h:column>
 		</h:dataTable>
 		<h:form>
-			<h:commandButton value="Create new Dish" action="create" />
+			<h:commandButton value="Create new Client" action="create" />
 		</h:form>
 	</ui:define>
 </ui:composition>

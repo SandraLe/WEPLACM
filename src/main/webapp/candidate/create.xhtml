@@ -5,26 +5,26 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/resources/master.xhtml">
-	<ui:define name="title">Create Dish</ui:define>
+	<ui:define name="title">Create Candidate</ui:define>
 	<ui:define name="content">
 	<div class="inputForm"><h:form>
 		<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 			<h:outputLabel value="name" for="name" />
-				<h:inputText id="name" value="#{createDish.dish.name}"/>
+				<h:inputText id="name" value="#{createCandidate.candidate.name}"/>
 				<h:message for="name"/>
 			<h:outputLabel value="description" for="description" />
-				<h:inputText id="description" value="#{createDish.dish.description}"/>
+				<h:inputText id="description" value="#{createCandidate.candidate.description}"/>
 				<h:message for="description"/>
 			<h:outputLabel value="price" for="price" />
-				<h:inputText id="price" value="#{createDish.dish.price}"/>
+				<h:inputText id="price" value="#{createCandidate.candidate.price}"/>
 				<h:message for="price"/>
-			<f:facet name="footer"><h:commandButton value="Submit" action="#{createDish.persist}" /></f:facet>
+			<f:facet name="footer"><h:commandButton value="Submit" action="#{createCandidate.persist}" /></f:facet>
 		</h:panelGrid>
 	</h:form></div>
 	<div class="result">
-	<h:outputText rendered="#{createDish.error}"
+	<h:outputText rendered="#{createCandidate.error}"
 		styleClass="error"
-		value="#{createDish.errorMessage}" />
+		value="#{createCandidate.errorMessage}" />
 	</div>
 	</ui:define>
 </ui:composition>

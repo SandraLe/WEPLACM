@@ -7,36 +7,36 @@
 <ui:composition template="/resources/master.xhtml">
 	<ui:define name="metadata">
 		<f:metadata>
-			<f:viewParam name="id" value="#{customerDetails.id}"></f:viewParam>
-			<f:event listener="#{customerDetails.ensureInitialized}" type="preRenderView"></f:event>
+			<f:viewParam name="id" value="#{clientDetails.id}"></f:viewParam>
+			<f:event listener="#{clientDetails.ensureInitialized}" type="preRenderView"></f:event>
 		</f:metadata>
 	</ui:define>
-	<ui:define name="title">Customer Details</ui:define>
+	<ui:define name="title">Client Details</ui:define>
 	<ui:define name="content">
 		<div class="details">
-			<h2>Customer ##{customerDetails.customer.id}</h2>
+			<h2>Client ##{clientDetails.client.id}</h2>
 			<h:form>
 				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error"
 					footerClass="form-footer">
 <h:outputLabel value="Name" for="name" />
-	<h:inputText id="name" value="#{customerDetails.customer.name}">
+	<h:inputText id="name" value="#{clientDetails.client.name}">
 	</h:inputText>
 <h:message for="name" />
 <h:outputLabel value="Address" for="address" />
-	<h:inputText id="address" value="#{customerDetails.customer.address}">
+	<h:inputText id="address" value="#{clientDetails.client.address}">
 	</h:inputText>
 <h:message for="address" />
 <h:outputLabel value="Phone Number" for="phoneNumber" />
-	<h:inputText id="phoneNumber" value="#{customerDetails.customer.phoneNumber}">
+	<h:inputText id="phoneNumber" value="#{clientDetails.client.phoneNumber}">
 	</h:inputText>
 <h:message for="phoneNumber" />
 												<f:facet name="footer">
-						<h:commandButton value="Submit changes" action="#{customerDetails.submitMasterDataChanges}" />
-						<h:commandButton value="Remove Customer" action="#{customerDetails.removeCustomer}" />
+						<h:commandButton value="Submit changes" action="#{clientDetails.submitMasterDataChanges}" />
+						<h:commandButton value="Remove Client" action="#{clientDetails.removeClient}" />
 					</f:facet>
 				</h:panelGrid>
 				<h3>Mandate</h3>
-				<h:dataTable value="#{customerDetails.customer.mandate}" var="cur"
+				<h:dataTable value="#{clientDetails.client.mandate}" var="cur"
 					styleClass="data-table" headerClass="data-cell header-cell"
 					columnClasses="data-cell,data-cell,data-cell">
 					<!-- columns for properties of the referenced entity -->
@@ -45,6 +45,20 @@
 					<h:outputText value="#{cur.received}">
 						<f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="Europe/Berlin"/>
 					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Hiring Information</f:facet>
+					<h:link outcome="/hiringInformation/details.xhtml">
+						<f:param name="id" value="#{cur.hiringInformation.id}"></f:param>
+						#{cur.hiringInformation}
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Job Profile</f:facet>
+					<h:link outcome="/jobProfile/details.xhtml">
+						<f:param name="id" value="#{cur.jobProfile.id}"></f:param>
+						#{cur.jobProfile}
+					</h:link>
 				</h:column>
 					<h:column>
 						<h:link outcome="/mandate/details.xhtml">
