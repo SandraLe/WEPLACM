@@ -1,4 +1,4 @@
-package weplacm;
+package workflow_rescources;
 
 public class Conclude_mandate {
     public boolean send_invoice() {

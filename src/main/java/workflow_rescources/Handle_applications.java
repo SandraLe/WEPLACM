@@ -1,4 +1,4 @@
-package weplacm;
+package workflow_rescources;
 
 public class Handle_applications {
     public boolean update_database() {

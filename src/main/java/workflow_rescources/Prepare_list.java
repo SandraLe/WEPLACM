@@ -1,4 +1,4 @@
-package weplacm;
+package workflow_rescources;
 
 public class Prepare_list {
     public boolean submit_list() {

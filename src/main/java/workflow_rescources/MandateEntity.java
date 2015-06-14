@@ -1,4 +1,4 @@
-package weplacm;
+package workflow_rescources;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
